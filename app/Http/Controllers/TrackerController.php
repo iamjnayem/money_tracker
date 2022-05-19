@@ -16,7 +16,7 @@ class TrackerController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            "name" => "required",
+            "name" => "required|unique:trackers",
             "type" => "required",
             "user_id" => "required",
         ];
@@ -33,7 +33,10 @@ class TrackerController extends Controller
             ]);
 
 
+
             $arr['type'] = json_encode($arr['type']);
+
+
 
             //before creating authorization is needed
             $tracker = Tracker::create($arr);
