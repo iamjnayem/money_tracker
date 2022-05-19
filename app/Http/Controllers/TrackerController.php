@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Traits\RequestTrait;
-use Illuminate\Http\Request;
 use App\Models\Tracker;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\TrackerPostRequest;
+use App\Http\Traits\RequestTrait;
 use Illuminate\Validation\ValidationException;
 
 
@@ -13,33 +11,17 @@ class TrackerController extends Controller
 {
     use RequestTrait;
 
-    public function store(Request $request)
+    public function store(TrackerPostRequest $request)
     {
-        $rules = [
-            "name" => "required|unique:trackers",
-            "type" => "required",
-            "user_id" => "required",
-        ];
 
         try {
-            $validation = Validator::make($request->all(), $rules);
-            if($validation->fails()){
-                throw new ValidationException($validation);
-            }
-            $arr = $request->only([
-                'name',
-                'type',
-                'user_id'
-            ]);
+           $validatedData =  $request->validated();
 
+            $validatedData = $request->safe()->only(['name', 'type', 'user_id']);
 
+            $validatedData['type'] = json_encode($validatedData['type']);
 
-            $arr['type'] = json_encode($arr['type']);
-
-
-
-            //before creating authorization is needed
-            $tracker = Tracker::create($arr);
+            $tracker = Tracker::create($validatedData);
             if($tracker){
 
                 return $this->SuccessResponse($tracker);
@@ -50,7 +32,8 @@ class TrackerController extends Controller
             $this->writeErrors($exception);
         }
 //        return response()->json([], 404);
-        return $this->FailResponse($this->message['data'],$this->message['messages'],$this->message['status'],$this->message['custom_code'],$this->message['validation']);
+        return $this->FailResponse($this->message['data'],$this->message['messages'],$this->message['status'],$this->message['custom_code'],
+            $this->message['validation']);
 
     }
 }
