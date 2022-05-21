@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
+
 class TrackerPostRequest extends FormRequest
 {
     /**
@@ -28,9 +29,16 @@ class TrackerPostRequest extends FormRequest
     {
         return [
             "name" => "required|unique:trackers",
-            "type" => "required",
-            "user_id" => "required",
+            "tracker_type" => "required",
+            "user_id" => "required"
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->route('user_id')
+        ]);
     }
 
     protected function failedValidation(Validator $validator)

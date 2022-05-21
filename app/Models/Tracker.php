@@ -10,6 +10,12 @@ class Tracker extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name", "type", "user_id"
+        "name", "tracker_type", "user_id"
     ];
+
+    protected $casts = [
+        'tracker_type' => 'object',
+    ];
+
+
 }

@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrackerController;
+use App\Http\Controllers\TestController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
    return $request->user();
 });
 
-Route::post('/tracker', [TrackerController::class, 'store']);
+Route::get('/tracker',[TrackerController::class, 'index']);
+Route::post('/tracker/{user_id}', [TrackerController::class, 'store']);
+
+//Route::post('/test/{abc}', [TestController::class, 'store']);

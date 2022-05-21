@@ -13,19 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('statements', function (Blueprint $table){
+        Schema::create('tracker_info', function (Blueprint $table){
             $table->increments('id');
             $table->foreignId('tracker_id');
-            $table->integer('statement_type');
+            $table->foreignId('payment_method_id');
+            $table->foreignId('category_id');
+            $table->integer('tracker_type');
             $table->integer('amount');
             $table->text('details');
-            $table->string('category');
-            $table->foreignId('payment_method');
             $table->string('image');
-
             $table->softDeletes();
             $table->timestamps();
-
         });
     }
 

@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('trackers', function (Blueprint $table){
             $table->increments('id');
-            $table->string('name');
-            $table->json('type');
             $table->foreignId('user_id');
+            $table->string('name');
+            $table->json('tracker_type');
             $table->softDeletes();
             $table->timestamps();
         });
