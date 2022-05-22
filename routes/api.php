@@ -23,5 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/tracker',[TrackerController::class, 'index']);
 Route::post('/tracker/{user_id}', [TrackerController::class, 'store']);
+//Route::get('/searchTracker', [TrackerController::class, 'searchTracker']);
 
-//Route::post('/test/{abc}', [TestController::class, 'store']);
+Route::delete('/tracker/{id}', [TrackerController::class, 'delete']);
+Route::patch('/tracker/{id}', [TrackerController::class, 'update']);
