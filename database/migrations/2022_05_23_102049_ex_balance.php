@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tracker_info', function (Blueprint $table){
+        Schema::create('ex_balance', function(Blueprint $table){
             $table->increments('id');
-            $table->foreignId('tracker_id');
-            $table->foreignId('payment_method_id');
-            $table->foreignId('category_id');
-            $table->integer('tracker_type');
-            $table->integer('amount');
-            $table->text('details');
-            $table->string('image');
+            $table->foreignId('tracker_info_id');
+            $table->integer('net_balance')->default(0);
+            $table->integer('income')->default(0);
+            $table->integer('expense')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statements');
+        Schema::dropIfExists('ex_balance');
     }
 };

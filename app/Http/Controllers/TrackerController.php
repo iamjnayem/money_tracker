@@ -37,6 +37,7 @@ class TrackerController extends Controller
 
     public function store(TrackerPostRequest $request, $user_id)
     {
+
         try {
             $validatedData = $request->validated();
 
@@ -96,4 +97,7 @@ class TrackerController extends Controller
         return $this->FailResponse($this->message['data'],$this->message['messages'],$this->message['status'],$this->message['custom_code'],$this->message['validation']);
     }
 
+    public function searchTracker(){
+        return "search Tracker";
+    }
 }

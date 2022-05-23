@@ -29,13 +29,15 @@ class TrackerPostRequest extends FormRequest
     {
         return [
             "name" => "required|unique:trackers",
-            "tracker_type" => "required",
-            "user_id" => "required"
+            "user_id" => "required",
+            "tracker_type" => "required"
+
         ];
     }
 
     public function prepareForValidation()
     {
+
         $this->merge([
             'user_id' => $this->route('user_id')
         ]);

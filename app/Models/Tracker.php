@@ -10,6 +10,7 @@ class Tracker extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = "ex_trackers";
     protected $fillable = [
         "name", "tracker_type", "user_id"
     ];

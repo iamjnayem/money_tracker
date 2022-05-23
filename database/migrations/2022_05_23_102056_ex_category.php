@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('trackers', function (Blueprint $table){
+        Schema::create('ex_category', function(Blueprint $table){
             $table->increments('id');
-            $table->foreignId('user_id');
+            $table->foreignId('tracker_info_id');
             $table->string('name');
-            $table->json('tracker_type');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trackers');
+        Schema::dropIfExists('ex_category');
     }
 };
